@@ -1,17 +1,18 @@
-T = input()
+
+T = raw_input()
 
 T = int(T)
 total_sum = []
 
 for i in range(0,T):
-  N = input()
-  N = int(N)
+  N = raw_input()
+  N = long(N)
   
   sum = 0
-  numbers = input()
-  sequence = numbers.split()
+  numbers = raw_input().split(" ")
+  sequence = numbers
   
-  sequence = [int(i) for i in sequence] 
+  sequence = [long(i) for i in sequence] 
   
   for j in range(0,len(sequence)-1):
     for k in range(j+1,len(sequence)):
@@ -20,4 +21,4 @@ for i in range(0,T):
   total_sum.append(sum)
   
 for i in range(0,len(sequence)):
-  print(total_sum[i])
+  print total_sum[i]
