@@ -13,7 +13,7 @@ for i in range(0,T):
   
   sequence = [int(i) for i in sequence] 
   
-  for j in range(0,len(sequence)):
+  for j in range(0,len(sequence)-1):
     for k in range(j+1,len(sequence)):
       sum = sum + (sequence[j]*sequence[k]*(2**(N+1-k)))
       
