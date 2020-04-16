@@ -1,24 +1,19 @@
+T = int(raw_input())
 
-T = raw_input()
-
-T = int(T)
-total_sum = []
 
 for i in range(0,T):
-  N = raw_input()
-  N = long(N)
+  N = input()
+  N = int(N)
   
   sum = 0
-  numbers = raw_input().split(" ")
-  sequence = numbers
+  sequence = raw_input().split(" ")
   
   sequence = [long(i) for i in sequence] 
   
   for j in range(0,len(sequence)-1):
-    for k in range(j+1,len(sequence)):
-      sum = sum + (sequence[j]*sequence[k]*(2**(N+1-k)))
+       if j == 0:
+            sum = (sum + (sequence[j]*sequence[k]*(2**(N+1-k))))%(1000000007)
+        else:
+            sum = (sum + (sequence[j]*sequence[k]*(2**(N-(k-j)))))%(1000000007)
       
-  total_sum.append(sum)
-  
-for i in range(0,len(sequence)):
-  print total_sum[i]
+  print sum
