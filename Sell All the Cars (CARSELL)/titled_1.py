@@ -1,3 +1,5 @@
+# cook your code here
+# good approach
 T = int(raw_input())
 
 for _ in range(0,T):
@@ -9,8 +11,11 @@ for _ in range(0,T):
   
   P.sort(reverse = True)
   
-  for i in range(0,N):
-    if P[i] - i < 0:
-      profit = profit + P[i] -i
+  for i in range(N):
+    if P[i]-i>0:
+        profit+=P[i]-i
+        profit%=1000000007
+    else:
+        break
       
-  print profit   
+  print profit
