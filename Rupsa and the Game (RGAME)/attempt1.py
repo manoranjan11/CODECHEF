@@ -1,6 +1,7 @@
 T = int(raw_input())
 
 #my own approach.. got 10% right
+#can reduce run time by following the correct answer with the same idea though
 for i in range(0,T):
   N = input()
   N = int(N)
