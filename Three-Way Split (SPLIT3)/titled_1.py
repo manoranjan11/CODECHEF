@@ -28,17 +28,20 @@ def travel(start_node,end_node):
       path.append(node)
       return 1
   
-  size = len(way[node])
-  for node in way[start_node]:   
-    if size == 1 | node == start_node:
-      break
+  length = len(path)
+  for node in way[start_node]: 
+    size = len(way[node])
+    if size == 1 | node == path[length - 1]:
+      continue
     else:
       discontinuity = discontinuity + size - 2
+      if discontinuity>2:
+        continue
       temp = travel(node,end_node)
       return 1
-    discontinuity = discontinuity - size + 2
-    path = path.remove(node)
-      
+  discontinuity = discontinuity - size + 2
+  path = path.remove(node)
+  return 0    
   
 for i in range(0,N-1):
     for j in range(i+1,N):
