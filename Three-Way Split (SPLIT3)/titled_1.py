@@ -17,12 +17,32 @@ cost1 = 0
 cost2 = 0
 cost3 = 0
 
-nodes_crossed = []
+discontinuity = 0
 possibilities = []
+path = []
 
 def travel(start_node,end_node):
- 
+  path = path.append(start_node)
+  for node in way[start_node]:
+    if node == end_node:
+      path.append(node)
+      return 1
+  
+  size = len(way[node])
+  for node in way[start_node]:   
+    if size == 1 | node == start_node:
+      break
+    else:
+      discontinuity = discontinuity + size - 2
+      temp = travel(node,end_node)
+      return 1
+    discontinuity = discontinuity - size + 2
+    path = path.remove(node)
+      
   
 for i in range(0,N-1):
-    for j in range(i,N):
-      travel(i,j)
+    for j in range(i+1,N):
+      temp = travel(i,j)
+      if discontinuity == 2:
+        for k in path:
+          cost1 = cost1 + traffic[k]
