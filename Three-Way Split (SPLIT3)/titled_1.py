@@ -1,10 +1,10 @@
 N = int(input())
 
-traffic = []
+traffic = {}
 way = {}
 for i in range(0,N):
   temp = int(input())
-  traffic.append(temp)
+  traffic[i+1] = temp
   way[i+1] = []
 
 for i in range(0,N-1):
@@ -17,12 +17,15 @@ cost1 = 0
 cost2 = 0
 cost3 = 0
 
-nodes_left = N
+nodes_crossed = []
 possibilities = []
 
-def travel(start_index):
-  for i in len(way[start_index]):
-    
+def travel(start_node,branches,nodes_passed):
+  cost = 0
+  
+  nodes_passed = nodes_passed.append(start_node)
+  for node in way[start_node]:
+    branches = branches + len(way[start_node])
   
 for i in range(0,N-1):
   if len(way[i+1]) == 1:
