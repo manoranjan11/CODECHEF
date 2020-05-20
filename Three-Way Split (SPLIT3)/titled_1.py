@@ -10,8 +10,8 @@ for i in range(0,N):
 for i in range(0,N-1):
   x,y = map(int,input().split())
   
-  way[x] = way[x].append(y)
-  way[y] = way[y].append(x)
+  way[x].append(y)
+  way[y].append(x)
 
 cost = 0
 
@@ -22,7 +22,10 @@ path = []
 
 
 def travel(start_node,end_node):
-  path = path.append(start_node)
+  global discontinuity
+  print("I m in travel mode")
+  path.append(start_node)
+  print(path)
   for node in way[start_node]:
     if node == end_node:
       path.append(node)
@@ -34,16 +37,15 @@ def travel(start_node,end_node):
     if size == 1 | node == path[length - 1]:
       continue
     else:
-      discontinuity = discontinuity + size - 2
-      discontinuity_nodes = discontinuity_nodes.append(start_node
-                                                      )
+      discontinuity += size-2
+      discontinuity_nodes.append(start_node)
       if discontinuity>2:
         continue
       temp = travel(node,end_node)
       return 1
-  discontinuity = discontinuity - size + 2
-  path = path.remove(node)
-  discontinuity_nodes = discontinuity_nodes.remove(node)
+  discontinuity += -size+2
+  path.remove(node)
+  discontinuity_nodes.remove(node)
   return 0    
 
 def calculate(node):
@@ -53,8 +55,8 @@ def calculate(node):
       if len(way[n]) !=1:
         calculate(n)
              
-for i in range(0,N-1):
-    for j in range(i+1,N):
+for i in range(1,2):
+    for j in range(2,3):
       temp = travel(i,j)
       if discontinuity == 2:
         for k in path:
@@ -62,14 +64,13 @@ for i in range(0,N-1):
         discontinuity = 0
        
         option = []
-        option = option.append(cost)
+        option.append(cost)
         cost = 0
         
         for k in discontinuity_nodes:
           for node in way[k]:
             if node not in path:
               calculate(node)
-              option = option.append(cost)
+              option.append(cost)
               cost = 0
-      possibilities = possibilities.append(option)
-      
+      	possibilities = possibilities.append(option)
