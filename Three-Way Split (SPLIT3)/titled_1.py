@@ -1,3 +1,5 @@
+#partially correct
+#dont know where the problem is
 N = int(input())
 
 traffic = {}
@@ -25,7 +27,7 @@ def travel(start_node,end_node):
   global discontinuity
   global previous_node
   path.append(start_node)
-   
+  #print(start_node)   
   for node in way[start_node]:
     if node == end_node:
       path.append(node)
@@ -45,33 +47,40 @@ def travel(start_node,end_node):
       continue
     else:
       
-      discontinuity += size-2
-      discontinuity_nodes.append(node)
+      if size-2>0:
+      	discontinuity += size-2
+      	discontinuity_nodes.append(node)
             
-      if discontinuity>2:
-        continue
+      """if discontinuity>2:
+        discontinuity += -len(way[node])+2
+        #path.remove(node)
+        discontinuity_nodes.remove(node)
+        return 0"""
       temp = travel(node,end_node)
       if temp == 0:
         continue
       else:
         return 1
-  discontinuity += -len(way[start_node])+2
+  #discontinuity += -len(way[start_node])+2
   path.remove(start_node)
-  discontinuity_nodes.remove(start_node)
+  #discontinuity_nodes.remove(start_node)
   return 0    
 
 def calculate(node):
   global cost
-  #print(cost)
+  global previous_node
+  #print(previous_node)
   cost = cost + traffic[node]
   for n in way[node]:
-    if n not in path:
+    if n not in path and n != previous_node:
       cost = cost + traffic[n]
       if len(way[n]) !=1:
+        previous_node = node
         calculate(n)
+        previous_node = n
              
 for i in range(1,N):
-    for j in range(i,N+1):
+    for j in range(i+1,N+1):
       temp = travel(i,j)
       if len(way[i])>1:
          discontinuity += len(way[i])-1
@@ -93,6 +102,7 @@ for i in range(1,N):
           for node in way[k]:
             #print(node)
             if node not in path:
+              previous_node = k
               #print(node)
               calculate(node)
               option.append(cost)
